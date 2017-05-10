@@ -1,0 +1,14 @@
+Esxcli network:
+---------------
+Usage: esxcli network {cmd} [cmd options]
+
+Available Namespaces:
+  fence                 Commands to list fence information
+  firewall              A set of commands for firewall related operations
+  ip                    Operations that can be performed on vmknics
+  nic                   Operations having to do with the configuration of Network Interface Card and getting and updating the NIC settings.
+  port                  Commands to get information about a port
+  sriovnic              Operations having to do with the configuration of SRIOV enabled Network Interface Card and getting and updating the NIC settings.
+  vm                    A set of commands for VM related operations
+  vswitch               Commands to list and manipulate Virtual Switches on an ESX host.
+  diag                  Operations pertaining to network diagnostics
