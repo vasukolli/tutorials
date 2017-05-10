@@ -1,0 +1,12 @@
+~ # esxcli vm
+Usage: esxcli vm {cmd} [cmd options]
+
+Available Namespaces:
+  process               Operations on running virtual machine processes
+
+~ # esxcli vm process
+Usage: esxcli vm process {cmd} [cmd options]
+
+Available Commands:
+  kill                  Used to forcibly kill Virtual Machines that are stuck and not responding to normal stop operations.
+  list                  List the virtual machines on this system. This command currently will only list running VMs on the system.
