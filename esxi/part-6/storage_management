@@ -1,0 +1,11 @@
+~ # esxcli storage
+Usage: esxcli storage {cmd} [cmd options]
+
+Available Namespaces:
+  core                  VMware core storage commands.
+  nfs                   Operations to create, manage, and remove Network Attached Storage filesystems.
+  nmp                   VMware Native Multipath Plugin (NMP). This is the VMware default implementation of the Pluggable Storage Architecture.
+  san                   IO device management operations to the SAN devices on the system.
+  vflash                virtual flash Management Operations on the system.
+  vmfs                  VMFS operations.
+  filesystem            Operations pertaining to filesystems, also known as datastores, on the ESX host.
