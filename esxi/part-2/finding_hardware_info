@@ -1,1 +1,36 @@
+Source: http://masteringvmware.com/category/esxi-command-line/
 
+Syntax for getting hardware Information:
+----------------------------------------
+esxcli hardware <cmd> <options> 
+  Available Namespaces:
+  cpu                   CPU information.
+  ipmi                  IPMI information.
+  bootdevice            Boot device information.
+  clock                 Interaction with the hardware clock.
+  memory                Memory information.
+  pci                   PCI device information and configuration.
+  platform              Platform information.
+  trustedboot           Information about the status of trusted boot.
+
+Get CPU information:
+--------------------
+esxcli hardware cpu
+Usage: esxcli hardware cpu {cmd} [cmd options]
+
+Available Namespaces:
+  cpuid                 Information from the CPUID instruction on each CPU.
+  global                Information and configuration global to all CPUs.
+
+Available Commands:
+  list                  List all of the CPUs on this host.
+
+IPMI information:
+-----------------
+esxcli hardware ipmi
+Usage: esxcli hardware ipmi {cmd} [cmd options]
+
+Available Namespaces:
+  fru                   Information from IPMI Field Replaceable Unit inventory (FRU).
+  sdr                   Information from IPMI Sensor Data Respository (SDR).
+  sel                   Information from IPMI System Event Log (SEL).
