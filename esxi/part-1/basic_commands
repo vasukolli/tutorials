@@ -1,0 +1,32 @@
+Basic Utils:
+------------
+ls -- used for listing files nad directories
+ls -l -- listing with details
+pwd -- current working directory
+cd -- change directory
+date -- find date and time
+df [options] -- for getting disk usage statics
+  Options:
+    --version  show program's version number and exit
+    -h         Human readable
+    -m         Megabytes
+    -k         Kilobytes
+
+Finding ESXI version and updates:
+---------------------------------
+vmware -l -- for esxi version
+vmware -v -- version details with build no
+esxcli software vib list -- check for install vib's
+
+Finding hostname and IP address:
+--------------------------------
+hostname -- get hostname
+hostname -i -- get ipaddress
+
+Monitoring ESXI load:
+---------------------
+esxtop -- display current running process details
+
+Start and Stop service:
+-----------------------
+ services.sh {start|stop|restart}
