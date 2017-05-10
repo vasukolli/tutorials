@@ -1,5 +1,3 @@
-Source: http://masteringvmware.com/category/esxi-command-line/
-
 Syntax for getting hardware Information:
 ----------------------------------------
 esxcli hardware <cmd> <options> 
