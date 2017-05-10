@@ -1,0 +1,17 @@
+a) while booting press down and up arrow key for pausing boot process
+b) then press key e for editing grub parameter settings
+c) scroll down to linux16 and add rd.break at the end of the line.
+Note: The rd.break setting instructs the boot process to stop at a specific point during the initramfs process. This is a point where just the main core filesystem has been mounted, but none of the other filesystems have been mounted. 
+Tip: also good idea to remove the “rhgb quiet” flags from the grub parameter list so that you can monitor what is happening.
+d)Then do “ctrl+x”, to resume the boot process with the modified grub parameter input. 
+f)Currently our root file system is /sysroot by default it is read only we need to remount it for write permissions
+Note: his is to make our root filesystem mount writable. Our root filesystem is currently “/sysroot”, that’s because we are so early in the boot process. Also at this early stage it is set to read-only mode. 
+g) mount -o remount,rw /sysroot
+f)chroot /sysroot
+Note: This temporarily makes “/sysroot” our root directory instead of “/”. This has the affect of changing the command
+g)passwd root -- change root passwd
+f)touch /.autorelabel -- issue if selinux enabled
+g)exit -- exit chroot
+h)exit --  exit again to reboot system
+
+Now we can login with new password.

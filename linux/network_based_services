@@ -1,0 +1,52 @@
+ss utility:
+
+ ss  is  used  to  dump socket statistics. It allows showing information similar to netstat.  It can display more  TCP  and  state  informations
+ than other tools.
+ 
+ ss -a -- list all listening and established connections
+ ss -at -- As above, but filtered to only display tcp sockets
+ ss -atn -- shows portno insted of service name ie., 22 instead of ssh(same as aove command)
+ 
+-----------------------------------------------------------------------------------------------------
+Installing and setting up apache server:
+
+ yum install httpd
+ systemctl enable https
+ systemtl status httpd
+ rpm -qc httpd -- where httpd config files located
+ journalctl -xu httpd.service -- view apache releated log messages
+ -- commands to check selinux mapping rules, contect assigment rules, boolean settings
+ --need to do--
+ 
+ -----------------------------------------------------------------------------------------------------
+ setting up ftp server
+ 
+ yum install vsftpd
+ rpm -qc vsftpd -- wher conf files of vsftpd located
+/etc/logrotate.d/vsftpd
+/etc/pam.d/vsftpd
+/etc/vsftpd/ftpusers
+/etc/vsftpd/user_list
+/etc/vsftpd/vsftpd.conf
+
+systemctl enable vsftpd && systemctl start vsftpd
+cat /etc/passwd | grep ftp
+------------------------------------------------------------------------------------------------
+NTP, system time, and the Hardware clock
+
+yum install chrony -- install ntp
+There are two main clocks in your machine:
+
+    hardware clock – This clock is operated on your machine’s motherboard
+    system-clock (aka system-time) – You’r operating system’s clock
+
+So when you start your machine, the first clock that your machine uses for timekeeping is the hardware clock, while the OS is booting up, the system-clock set’s gets it’s time from the hardware-clock. After that the system-clock’s time get’s maintained by the OS. 
+
+timedatectl is used for managing system clock.
+$ date
+Tue 23 Jun 02:32:32 BST 2015
+
+$ timedatectl set-time 04:00
+
+$ date
+Tue 23 Jun 04:00:02 BST 2015

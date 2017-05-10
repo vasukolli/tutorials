@@ -1,0 +1,153 @@
+interactive shell – This is a shell sessions used for running commands interactively via the command line.
+
+login shell – This is a shell sessions used running a shell script inside it.
+
+In user home directory:
+
+/etc/profile
+       The systemwide initialization file, executed for login shells
+~/.bash_profile
+       The personal initialization file, executed for login shells
+~/.bashrc
+       The individual per-interactive-shell startup file
+~/.bash_logout
+       The individual login shell cleanup file, executed when a login shell exits
+       
+All the following let’s you switch user, and switch into a login shell:
+
+    su - {username}
+    su -l {username}
+    su --login {username}
+If you want to su into an interactive shell, you do:
+
+$ su {username}
+
+FROM GNU BASH MANUAL
+
+A login shell is a shell where you login. You can recognize a login shell from a ps -f listing, it will have a hyphen at the start of the program name, for example:
+
+root      3561  3553  0 09:38 pts/0    00:00:00 -bash
+qa        7327  3432  0 10:46 pts/1    00:00:00 -bash
+
+An interactive shell is one which reads commands from it's standard-input, usually a terminal.
+
+Once a match is found, the other files are ignored, even if they exist. The /etc/bashrc file might be used by both the ~/.bash_profile and the ~/.bashrc files. That would mean that the /etc/bashrc file is sourced on all interactive invocations of bash, whether it is a login or non-login shell.
+
+So, the .bashrc file is also run every time you request a new interactive shell. This does not include a shell script. Normally variables, aliases or functions are placed in this file.
+
+Bash shell scripts read a different file if suitably instructed. If the user defines (usually in their own .bash_profile) a variable BASH_ENV which contains a filename, scripts will read this. If this variable is not set (and exported) then bash scripts will not read any startup files. 
+
+
+
+Since you probably know what a "shell" is and are using it your question only targets the difference between login shell and everything else...
+
+A login shell only differs from any other shell by the fact that one or more initial setup scripts (resources) are loaded on startup, typically named with "profile" in their name. in there basic settings are defined that are derived to subsequently opened shells (so they only need to be defined once).
+
+Whenever a new user is created, by default, a set of (usually hidden) config files will get copied to the user’s new home folder. These files are actually duplicate of all the files contained in the following directory:
+
+/etc/skel
+
+i.e. :
+
+$ ls -l /etc/skel/
+
+total 6
+
+-rw-r–r–   1 root     sys              136 Nov 9 2006 local.cshrc
+
+-rw-r–r–   1 root     sys              157 Nov 9 2006 local.login
+
+-rw-r–r–   1 root     sys              174 Nov 9 2006 local.profile
+
+the useradd commands automatically copies all the content from this folder and places it in the user’s home directory.
+
+when a user logs into a RHEL machine (using username and password), the following scripts are executed automatically (in this order):
+
+/etc/profile       # (this sets up user env variables, e.g. path, hostname, histsize….etc)…this script will also trigger:
+
+/etc/profile.d     # (directory containing lots of other files.
+
+{user’s home folder}/.bash_profile # can be used to add your own stuff including overriding what was set in the /etc/profile script.
+
+{user’s home folder}/.bashrc     # (used for setting local variables e.g. the PS1 variables)
+
+ 
+
+However these does get executed when a non-login shell is generated. a non-login shell is a shell that gets opened buit without getting a username/password prompt. Here are some ways to start a non-login shell:
+
+–         Applications=>system tools=>terminal
+
+–        When you start a shell script, linux will automatically create a new shell for that script to run in, and this new shell is a non-login shell.
+
+–         At the command line, type ksh, followed by bash.
+
+In a non-login shell the following scripts are run:
+
+ 
+
+1. {user’s home folder}/bashrc,
+
+2. /etc/bashrc,
+
+3. /etc/profile.d (have a look through these script to familiarize yourself)
+
+------------------------------------------------------------------------------------------------------------------------------
+
+Difference between Login shell and Non login shell
+
+Here we will learn the difference between a Login shell and Non login shell.
+The shell program, for example Bash, uses a collection of startup scripts to create an environment. Each script has a specific use and affects the login environment differently. Every subsequent script executed can override the values assigned by previous scripts.
+
+Startup is configured differently for Login shells and Non login shells.
+1) Login shells
+2) Non login shells
+
+ 
+
+1) Login shells
+A Login shell is started after a successful login, using /bin/login, by reading the /etc/passwd file. Login shell is the first process that executes under our user ID when we log in to a session. The login process tells the shell to behave as a login shell with a convention: passing argument 0, which is normally the name of the shell executable, with a “-” character prepended. For example, for Bash shell it will be -bash.
+
+When Bash is invoked as a Login shell;
+→Login process calls /etc/profile
+→/etc/profile calls the scripts in /etc/profile.d/
+→Login process calls ~/.bash_profile
+→~/.bash_profile calls ~/.bashrc
+→~/.bashrc calls /etc/bashrc
+
+Login shells include the following.
+• Shells created by explicitly telling to login.
+examples: # su - | # su -l | # su --login | # su USERNAME - | # su -l USERNAME | # su --login USERNAME | # sudo -i
+• Shells created at login, including X login.
+
+A Login shell can be recognized by the following procedure.
+Execute the below command in shell.
+
+# echo $0
+
+If the output is the name of our shell, prepended by a dash, then it is a login shell.
+For example -bash, -su etc.
+
+ 
+
+2) Non login shells
+A Non login shell is started by a program without a login. In this case, the program just passes the name of the shell executable. For example, for a Bash shell it will be simply bash.
+
+When bash is invoked as a Non login shell;
+→Non-login process(shell) calls ~/.bashrc
+→~/.bashrc calls /etc/bashrc
+→/etc/bashrc calls the scripts in /etc/profile.d/
+
+Non login shells include the following.
+• Shells created using the below command syntax.
+examples: # su | # su USERNAME
+• Graphical terminals
+• Executed scripts
+• Any other bash instances
+
+A Non login shell can be recognized by the following procedure.
+Execute the below command in shell.
+
+# echo $0
+
+If the output is the name of our shell, does not prepend by a dash, then it is a Non login shell.
+For example bash, su etc.
