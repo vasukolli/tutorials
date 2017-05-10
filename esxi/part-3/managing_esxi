@@ -1,0 +1,24 @@
+esxcli system:
+--------------
+Usage: esxcli system {cmd} [cmd options]
+
+Available Namespaces:
+  boot                  Operations relating to host boot that allow manipulation of VMkernel boot time configuration.
+  coredump              Operations pertaining to the VMkernel Core dump configuration.
+  module                Operations that allow manipulation of the VMkernel loadable modules and device drivers. Operations include load, list and setting options.
+  process               Commands relating to running processes.
+  secpolicy             Options related to VMkernel access control subsystem. These options are typically in place for specific workarounds or debugging. These commands should be used at the
+                        direction of VMware Support Engineers.
+  security              Operations pertaining to server authentication.
+  settings              Operations that allow viewing and manipulation of system settings.
+  stats                 Access to various system statistics
+  syslog                Operations relating to system logging
+  visorfs               Operations pertaining to the visorfs memory filesytem.
+  hostname              Operations pertaining the network name of the ESX host.
+  maintenanceMode       Command to manage the system's maintenance mode.
+  shutdown              Command to shutdown the system.
+  snmp                  Commands pertaining to SNMPv1/v2c/v3 Agent configuration.
+  time                  Commands to get and set system time.
+  uuid                  Get the system UUID
+  version               Commands to get version information.
+  welcomemsg            Commands to get and set the welcome banner for DCUI.
